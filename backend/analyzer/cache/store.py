@@ -2,7 +2,7 @@ from typing import Any
 
 from django.core.cache import cache
 
-TTL: int = 3600
+TTL: int = 300
 
 
 def get_cache(key: str) -> Any | None:
