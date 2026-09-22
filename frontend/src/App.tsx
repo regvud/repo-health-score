@@ -1,7 +1,8 @@
 import {useCallback, useEffect, useState} from 'react'
 import SearchBar from './components/SearchBar'
-import HealthReport from './components/HealthReport'
-import {analyzeRepo, type HealthReport as HealthReportType} from './api'
+import {analyzeRepo} from './api'
+import {HealthReport} from "./interfaces/responses.ts";
+import ReportComponent from "./components/ReportComponent.tsx";
 
 const ROUTE = '/score'
 
@@ -12,7 +13,7 @@ function getUrlParam(): string {
 export default function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [report, setReport] = useState<HealthReportType | null>(null)
+  const [report, setReport] = useState<HealthReport | null>(null)
 
   const handleSearch = useCallback(async (url: string) => {
     history.replaceState(null, '', `${ROUTE}?url=${encodeURIComponent(url)}`)
@@ -45,7 +46,7 @@ export default function App() {
       <main className="main">
         <SearchBar onSearch={handleSearch} loading={loading} defaultValue={getUrlParam()}/>
         {error && <div className="error-msg">{error}</div>}
-        {report && <HealthReport report={report}/>}
+        {report && <ReportComponent report={report}/>}
       </main>
     </div>
   )

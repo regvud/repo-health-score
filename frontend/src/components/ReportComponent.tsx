@@ -5,7 +5,7 @@ interface HealthReportProps {
   report: HealthReport
 }
 
-export default function HealthReport({report}: HealthReportProps) {
+export default function ReportComponent({report}: HealthReportProps) {
   return (
     <div className="report">
       <div className="report-header">
