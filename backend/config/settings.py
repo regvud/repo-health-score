@@ -12,6 +12,18 @@ DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+        "TIMEOUT": 3600,
+    }
+}
 
 INSTALLED_APPS = [
     "corsheaders",

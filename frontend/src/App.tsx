@@ -1,7 +1,7 @@
-import { useState, useCallback, useEffect } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import SearchBar from './components/SearchBar'
 import HealthReport from './components/HealthReport'
-import { analyzeRepo, type HealthReport as HealthReportType } from './api'
+import {analyzeRepo, type HealthReport as HealthReportType} from './api'
 
 const ROUTE = '/score'
 
@@ -43,9 +43,9 @@ export default function App() {
       </header>
 
       <main className="main">
-        <SearchBar onSearch={handleSearch} loading={loading} defaultValue={getUrlParam()} />
+        <SearchBar onSearch={handleSearch} loading={loading} defaultValue={getUrlParam()}/>
         {error && <div className="error-msg">{error}</div>}
-        {report && <HealthReport report={report} />}
+        {report && <HealthReport report={report}/>}
       </main>
     </div>
   )

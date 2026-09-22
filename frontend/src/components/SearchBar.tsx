@@ -1,14 +1,13 @@
-import { useState, type FormEvent } from 'react'
-
+import {type FormEvent, useState} from 'react'
 const GITHUB_REPO_URL = /^https?:\/\/github\.com\/([^/]+)\/([^/\s?#]+)/
 
-interface Props {
+interface SearchBarProps {
   onSearch: (url: string) => void
   loading: boolean
   defaultValue?: string
 }
 
-export default function SearchBar({ onSearch, loading, defaultValue = '' }: Props) {
+export default function SearchBar({onSearch, loading, defaultValue = ''}: SearchBarProps) {
   const [value, setValue] = useState(defaultValue)
   const [validationError, setValidationError] = useState<string | null>(null)
 
@@ -31,7 +30,10 @@ export default function SearchBar({ onSearch, loading, defaultValue = '' }: Prop
           type="text"
           placeholder="https://github.com/owner/repo"
           value={value}
-          onChange={e => { setValue(e.target.value); setValidationError(null) }}
+          onChange={e => {
+            setValue(e.target.value);
+            setValidationError(null)
+          }}
           disabled={loading}
           autoFocus
         />

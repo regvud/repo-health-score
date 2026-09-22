@@ -1,23 +1,11 @@
-import type { HealthReport, Signal } from '../api'
+import type {HealthReport} from '../interfaces/responses'
+import {scoreColor, STATUS_COLOR} from "../shared/colors.ts";
 
-const STATUS_COLOR: Record<Signal['status'], string> = {
-  good: 'var(--green)',
-  warning: 'var(--amber)',
-  bad: 'var(--red)',
-  neutral: 'var(--muted)',
-}
-
-function scoreColor(score: number): string {
-  if (score >= 70) return 'var(--green)'
-  if (score >= 40) return 'var(--amber)'
-  return 'var(--red)'
-}
-
-interface Props {
+interface HealthReportProps {
   report: HealthReport
 }
 
-export default function HealthReport({ report }: Props) {
+export default function HealthReport({report}: HealthReportProps) {
   return (
     <div className="report">
       <div className="report-header">
@@ -35,7 +23,7 @@ export default function HealthReport({ report }: Props) {
         </div>
 
         <div className="score-block">
-          <span className="score-number" style={{ color: scoreColor(report.score) }}>
+          <span className="score-number" style={{color: scoreColor(report.score)}}>
             {report.score}
           </span>
           <span className="score-denom">/ 100</span>
@@ -51,7 +39,7 @@ export default function HealthReport({ report }: Props) {
                 <span className="badge">{signal.weight}%</span>
                 <span
                   className="signal-score"
-                  style={{ color: signal.score != null ? STATUS_COLOR[signal.status] : 'var(--muted)' }}
+                  style={{color: signal.score != null ? STATUS_COLOR[signal.status] : 'var(--muted)'}}
                 >
                   {signal.score ?? '—'}
                 </span>
